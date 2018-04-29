@@ -87,13 +87,33 @@ public class Vue {
         for (int i = 0; i < tab.length; i++){
 
             int current = tab[i];
-            int rectHeight = (int) (SCREEN_HEIGHT *  ( (double) current / max));
+            int rectHeight = (int) (SCREEN_HEIGHT *  ((double) current / max));
             this.context.setFill(Color.hsb(100 + ((double) rectHeight/(double)SCREEN_HEIGHT) * 125, 1, 1));
             this.context.fillRect(i * rectWidth, 0, rectWidth, rectHeight);
 
         }
         context.setFill(Color.BLACK);
     }
+
+    public void drawArray(Column[] tab){
+
+        int max = 0;
+        int rectWidth = (int) SCREEN_WIDTH / tab.length;
+
+        for (Column i : tab){
+            if (i.value > max){
+                max = i.value;
+            }
+        }
+
+        for (int i = 0; i < tab.length; i++){
+
+            tab[i].draw(i * rectWidth);
+
+        }
+        context.setFill(Color.BLACK);
+    }
+
 
     public void setController(Controller controller){
         this.controller = controller;
@@ -104,7 +124,7 @@ public class Vue {
         this.currentAlgo = algo;
     }
 
-    public static void highlightIndex(int[] tab, int indexA, String color){
+    public void highlightIndex(Column[] tab, int index, String color){
 
         switch (color) {
 

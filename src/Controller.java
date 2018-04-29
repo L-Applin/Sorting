@@ -20,16 +20,23 @@ public class Controller {
         algo.sort(this.currentArray);
     }
 
-    public void highlightCurrent(int[] tab, int i){
+    public void highlightCurrent(Column[] tab, int i){
         vue.highlightIndex(tab, i, "red");
     }
 
-    public void highlightNext(int[] tab, int i){
+    public void highlightNext(Column[] tab, int i){
+        vue.highlightIndex(tab, i, "green");
 
     }
 
-    public void highlightSwap(int[] tab, int i, int j){
+    public void highlightSwap(Column[] tab, int i, int j){
 
     }
 
+
+    public void updateDisplay(){
+
+        vue.drawArray(currentArray);
+
+    }
 }

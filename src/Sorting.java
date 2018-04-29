@@ -1,4 +1,5 @@
 import javafx.application.Application;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -6,6 +7,7 @@ public class Sorting extends Application{
 
     public static final int ARRAY_SIZE = 100;
     public static final int UPDATE_TIME = 500; // in ms
+    public static final Algo CURRENT_ALGO = new Selection();
 
 
     public void start(Stage primaryStage) {
@@ -13,19 +15,31 @@ public class Sorting extends Application{
         Vue vue = new Vue(primaryStage);
         Controller controller = new Controller(vue);
         vue.setController(controller);
-        vue.setAlgo(new Selection());
+        vue.setAlgo(CURRENT_ALGO);
 
         int[] test = iota(ARRAY_SIZE);
+        Column[] testColumn = initArray(ARRAY_SIZE, vue.context);
         Algo.shuffle(test, 4, true);
         controller.setCurrentArray(test);
 
         vue.drawArray(test);
 
-        Benchmark benchmark = new Benchmark(test);
+        // Benchmark benchmark = new Benchmark(test);
         // benchmark.execute();
 
     }
 
+    protected static Column[] initArray(int n, GraphicsContext c){
+
+        Column[] result = new Column[n];
+
+        for (int i = 0; i < result.length; i++) {
+            result[i] = new Column(i, c);
+        }
+
+        return result;
+
+    }
 
     protected static int[] iota(int n){
         int[] result = new int[n];

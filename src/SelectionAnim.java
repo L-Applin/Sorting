@@ -1,10 +1,14 @@
-public class SelectionAnim extends Algo{
+public class SelectionAnim extends Algo implements ColumnSort {
 
     private Controller controller;
 
-    public SelectionAnim(Controller controller){
+    public SelectionAnim(){
         this.name = "Selection";
-        this.controller = controller;
+
+    }
+
+    public void setController(Controller c){
+        this.controller = c;
     }
 
     @Override
@@ -36,11 +40,11 @@ public class SelectionAnim extends Algo{
 
             int smallest = i;
 
-            controller.highlightCurrent(tab, smallest);
+            controller.highlightCurrent(tab[smallest]);
 
             for (int j = i + 1; j < tab.length ; j++) {
 
-                controller.highlightNext(tab, j);
+                controller.highlightNext(tab[j]);
 
                 if (tab[j].value < tab[smallest].value){
                     smallest = j;
@@ -48,14 +52,18 @@ public class SelectionAnim extends Algo{
                 }
 
                 Thread.sleep(100);
-                controller.updateDisplay();
+
+                controller.updateDisplay(tab);
+
             }
+
             // Algo.swap(tab, i, smallest);
-            controller.highlightSwap(tab, i, smallest);
+            controller.highlightSwap(tab[i], tab[smallest]);
             Column temp = tab[i];
             tab[i] = tab[smallest];
             tab[smallest] = temp;
-            controller.updateDisplay();
+
+            controller.updateDisplay(tab);
         }
     }
 

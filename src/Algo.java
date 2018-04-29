@@ -34,6 +34,32 @@ public abstract class Algo {
 
     }
 
+    public static void shuffle(Column[] tab, int iter, boolean mixup){
+
+        // System.out.println("\nSHUFFLIGN " + tab.length + " elements");
+
+        for (int i = 0; i < iter; i++) {
+            for (int j = 0; j < tab.length; j++) {
+                int new_rand_index = (int) Math.floor(Math.random() * tab.length);
+                if (new_rand_index != j) {
+                    // swap the value
+                    int temp = tab[new_rand_index].value;
+                    tab[new_rand_index] = tab[j];
+                    tab[j].value = temp;
+
+                }
+            }
+        }
+
+        for (int i = 0; i < tab.length; i++) {
+            if (Math.random() > 0.1 && mixup){
+                tab[i].value = tab[i].value + (int) Math.floor(Math.random() * 3);
+            }
+
+        }
+
+    }
+
     public int getAccess(){
         return access;
     }

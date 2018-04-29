@@ -12,7 +12,8 @@ public class Column {
 
     public Column(int value, GraphicsContext c){
         this.value = value;
-        this.rectHeight = (int) (Vue.SCREEN_HEIGHT *  ( (double) value / Sorting.ARRAY_SIZE + 2));
+      // int rectHeight = (int) (SCREEN_HEIGHT *  ((double) current / max));
+        this.rectHeight = (int) (Vue.SCREEN_HEIGHT *  ( (double) value / (Sorting.ARRAY_SIZE + 2)));
         this.color = 100 + ((double) rectHeight/(double) Vue.SCREEN_HEIGHT) * 125;
         this.context = c;
 
@@ -21,13 +22,17 @@ public class Column {
     public void draw(int xPos){
 
         this.context.setFill(Color.hsb(this.color, 1, 1));
-        this.context.fillRect(xPos * rect_width, 0, rect_width, this.rectHeight);
+        this.context.fillRect(xPos, 0, rect_width, this.rectHeight);
 
     }
 
-    public void highlight(double h){
-        this.color = h;
+    public void highlight(double hue){
+        this.color = hue;
     }
 
+
+    public int getRectHeight(){
+        return this.rectHeight;
+    }
 
 }

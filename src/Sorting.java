@@ -7,7 +7,7 @@ public class Sorting extends Application{
 
     public static final int ARRAY_SIZE = 100;
     public static final int UPDATE_TIME = 500; // in ms
-    public static final Algo CURRENT_ALGO = new Selection();
+    public static Algo CURRENT_ALGO = new SelectionAnim();
 
 
     public void start(Stage primaryStage) {
@@ -17,12 +17,15 @@ public class Sorting extends Application{
         vue.setController(controller);
         vue.setAlgo(CURRENT_ALGO);
 
+        ((SelectionAnim) CURRENT_ALGO).setController(controller);
+
         int[] test = iota(ARRAY_SIZE);
         Column[] testColumn = initArray(ARRAY_SIZE, vue.context);
         Algo.shuffle(test, 4, true);
-        controller.setCurrentArray(test);
+        controller.setCurrentArray(testColumn);
 
-        vue.drawArray(test);
+        Algo.shuffle(testColumn, 4, true);
+        vue.drawArray(testColumn);
 
         // Benchmark benchmark = new Benchmark(test);
         // benchmark.execute();

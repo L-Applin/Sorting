@@ -76,7 +76,7 @@ public class Vue {
     public void drawArray(int[] tab){
 
         int max = 0;
-        int rectWidth = (int) SCREEN_WIDTH / tab.length;
+        int rectWidth = SCREEN_WIDTH / tab.length;
 
         for (int i : tab){
             if (i > max){
@@ -95,10 +95,11 @@ public class Vue {
         context.setFill(Color.BLACK);
     }
 
+
     public void drawArray(Column[] tab){
 
         int max = 0;
-        int rectWidth = (int) SCREEN_WIDTH / tab.length;
+        int rectWidth = SCREEN_WIDTH / tab.length;
 
         for (Column i : tab){
             if (i.value > max){
@@ -111,6 +112,7 @@ public class Vue {
             tab[i].draw(i * rectWidth);
 
         }
+
         context.setFill(Color.BLACK);
     }
 
@@ -124,15 +126,18 @@ public class Vue {
         this.currentAlgo = algo;
     }
 
-    public void highlightIndex(Column[] tab, int index, String color){
+    public void highlightIndex(Column col, String color){
 
         switch (color) {
 
             case "red":
+                col.highlight(0);
                 break;
             case "green":
+                col.highlight(0.5);
                 break;
             case "blue":
+                col.highlight(1);
         }
 
     }

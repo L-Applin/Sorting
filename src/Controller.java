@@ -2,39 +2,40 @@
 public class Controller {
 
     public Vue vue;
-    private int[] currentArray;
+    private Column[] currentArray;
 
     public Controller(Vue vue) {
         this.vue = vue;
     }
 
-    public void setCurrentArray(int[] tab){
+    public void setCurrentArray(Column[] tab){
         this.currentArray = tab;
     }
 
-    public int[] getCurrentArray(){
+    public Column[] getCurrentArray(){
         return currentArray;
     }
 
+    // TODO : make this method wor with Column Arrays
     public void sortArray(Algo algo) throws InterruptedException {
         algo.sort(this.currentArray);
     }
 
-    public void highlightCurrent(Column[] tab, int i){
-        vue.highlightIndex(tab, i, "red");
+    public void highlightCurrent(Column col){
+        vue.highlightIndex(col, "red");
     }
 
-    public void highlightNext(Column[] tab, int i){
-        vue.highlightIndex(tab, i, "green");
-
-    }
-
-    public void highlightSwap(Column[] tab, int i, int j){
+    public void highlightNext(Column col){
+        vue.highlightIndex(col, "green");
 
     }
 
+    public void highlightSwap(Column i, Column j){
 
-    public void updateDisplay(){
+    }
+
+
+    public void updateDisplay(Column[] tab){
 
         vue.drawArray(currentArray);
 
